@@ -1,7 +1,7 @@
 import argparse
 import os
 
-import util.format as uf
+from lib.util import format as uf
 
 import torch
 import torchaudio
@@ -64,6 +64,7 @@ if __name__ == '__main__':
     if sample_rate != bundle.sample_rate:
         waveform = torchaudio.functional.resample(waveform, sample_rate, bundle.sample_rate)
 
+    print(waveform.shape)
     # Infer on the Loaded Waveform
     with torch.inference_mode():
         emission, _ = model(waveform)
